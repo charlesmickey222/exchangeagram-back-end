@@ -40,9 +40,10 @@ async function createComment(req, res) {
     newComment.author = profile
     res.status(201).json(newComment)
   } catch (error) {
-    
+    res.status(500).json(error)
   }
 }
+    
 
 
 
