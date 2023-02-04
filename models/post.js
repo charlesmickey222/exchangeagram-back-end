@@ -17,6 +17,18 @@ const commentSchema = new Schema(
   { timestamps: true }
 )
 
+const likeSchema = new Schema(
+  {
+    like: Boolean,
+    dislike: Boolean,
+    likedBy: {
+      type: Schema.Types.ObjectId,
+      ref: 'Profile'
+    }
+  },
+  { timestamps: true }
+)
+
 
 const postSchema = new Schema(
   {
@@ -27,7 +39,11 @@ const postSchema = new Schema(
     caption: String,
 
     comments: [commentSchema],
-=======
+    likes: [likeSchema],
+
+    comments: [commentSchema],
+
+
 
     author: {
       type: Schema.Types.ObjectId,
