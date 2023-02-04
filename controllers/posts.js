@@ -29,9 +29,25 @@ async function create(req, res) {
   }
 }
 
+async function createComment(req, res) {
+  try {
+    req.body.author = req.user.profile
+    const post = await Post.findById(req.params.id)
+    post.comments.push(req.body)
+    await post.save()
+    const newComment = post.comments[post.comments.length -1]
+    const profile = await Profile.findById(req.user.profile)
+    newComment.author = profile
+    res.status(201).json(newComment)
+  } catch (error) {
+    
+  }
+}
+
 
 
 export {
   index,
-  create
+  create,
+  createComment,
 }
