@@ -1,5 +1,5 @@
-import { Profile } from "../models/profile";
-import { Post } from "../models/post";
+import { Profile } from "../models/profile.js"
+import { Post } from "../models/post.js";
 
 async function index(req, res) {
   try {
