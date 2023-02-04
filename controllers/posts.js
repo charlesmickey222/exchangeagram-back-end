@@ -1,7 +1,7 @@
 import { Profile } from "../models/profile";
 import { Post } from "../models/post";
 
-async function index (req, res) {
+async function index(req, res) {
   try {
     const posts = await Post.find({})
       .populate('author')
@@ -12,7 +12,24 @@ async function index (req, res) {
   }
 }
 
+async function create(req, res) {
+  try {
+    req.body.author = req.user.profile
+    const post = await Post.create(req.body)
+    const profile = await Profile.findByIdAndUpdate(
+      req.user.profile,
+      { $push: { posts: post } },
+      { new: true }
+    )
+    post.author = profile
+    res.status(201).json(post)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 export {
   index,
-  
+  create
 }
