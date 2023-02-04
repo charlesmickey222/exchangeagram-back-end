@@ -2,7 +2,6 @@ import mongoose from "mongoose"
 
 const Schema = mongoose.Schema
 
-
 const commentSchema = new Schema(
   {
     text: {
@@ -29,7 +28,6 @@ const likeSchema = new Schema(
   { timestamps: true }
 )
 
-
 const postSchema = new Schema(
   {
     photo: {
@@ -37,14 +35,8 @@ const postSchema = new Schema(
       required: true
     },
     caption: String,
-
     comments: [commentSchema],
     likes: [likeSchema],
-
-    comments: [commentSchema],
-
-
-
     author: {
       type: Schema.Types.ObjectId,
       ref: 'Profile'
