@@ -8,6 +8,8 @@ Use this to go build things! 🚀
 
 ## To Use This Template
 
+testing .env
+
 **Replace `<name-of-your-app-here>` in the commands below with the name of your app!**
 
 ```bash
