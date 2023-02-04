@@ -43,9 +43,6 @@ async function createComment(req, res) {
     res.status(500).json(error)
   }
 }
-    
-
-
 
 export {
   index,
