@@ -29,4 +29,21 @@ function addPhoto(req, res) {
   })
 }
 
-export { index, addPhoto }
+async function show(req, res) {
+  try {
+    const profile = await Profile.findById(req.params.id)
+    .populate('name')
+    .populate('photo')
+    .populate('posts')
+    .populate('messages')
+    res.status(200).json(profile)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
+export {
+  index,
+  addPhoto,
+  show
+}
