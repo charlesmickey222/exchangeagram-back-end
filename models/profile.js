@@ -2,9 +2,31 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
+const messageSchema = new Schema(
+  {
+    text: {
+      type: String,
+      required: true
+    },
+    sender: {
+      type: Schema.Types.ObjectId,
+      ref: 'Profile'
+    },
+    recipient: {
+      type: Schema.Types.ObjectId,
+      ref: 'Profile'
+    },
+  }
+)
+
 const profileSchema = new Schema({
   name: String,
-  photo: String
+  photo: String,
+  posts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Post'
+  }],
+  messages: [messageSchema]
 },{
   timestamps: true,
 })
