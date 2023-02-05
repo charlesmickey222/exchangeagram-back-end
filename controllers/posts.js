@@ -74,7 +74,20 @@ async function updatePost(req, res) {
   }
 }
 
-
+async function createLike(req, res) {
+  try {
+    req.body.author = req.user.profile
+    const post = await Post.findById(req.params.id)
+    post.likes.push(req.body)
+    await post.save()
+    const newLike = post.likes[post.likes.length - 1]
+    const profile = await Profile.findById(req.user.profile)
+    newLike.likedBy = profile
+    res.status(201).json(newLike)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
 
 export {
   index,
@@ -82,4 +95,5 @@ export {
   createComment,
   deletePost as delete,
   updatePost as update,
+  createLike
 }
