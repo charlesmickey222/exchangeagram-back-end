@@ -44,8 +44,28 @@ async function createComment(req, res) {
   }
 }
 
+async function deletePost(req, res) {
+  try {
+    const post = await Post.findById(req.params.id)
+    if (post.author.equals(req.user.profile)) {
+      await Post.findByIdAndDelete(req.params.id)
+      const profile = await Profile.findById(req.user.profile)
+      profile.posts.remove({_id: req.params.id})
+      await profile.save()
+      res.status(200).json(post)
+    } else {
+      throw new Error('Not Authorized')
+    }
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+
+
 export {
   index,
   create,
   createComment,
+  deletePost as delete,
 }
