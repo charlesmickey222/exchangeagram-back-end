@@ -61,6 +61,19 @@ async function deletePost(req, res) {
   }
 }
 
+async function updatePost(req, res) {
+  try {
+    const post = await Post.findByIdAndUpdate(
+      req.params.id, 
+      req.body,
+      { new: true }
+    ).populate('author')
+    res.status(200).json(post)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 
 
 export {
@@ -68,4 +81,5 @@ export {
   create,
   createComment,
   deletePost as delete,
+  updatePost as update,
 }
