@@ -12,6 +12,7 @@ router.use(decodeUserFromToken)
 router.get('/', checkAuth, postsCtrl.index)
 router.post('/', checkAuth, postsCtrl.create)
 router.post('/:id/comments', checkAuth, postsCtrl.createComment)
+router.post('/:id/likes', checkAuth, postsCtrl.createLike)
 router.delete('/:id', checkAuth, postsCtrl.delete)
 
 

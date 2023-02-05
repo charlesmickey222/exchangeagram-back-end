@@ -45,5 +45,5 @@ async function show(req, res) {
 export {
   index,
   addPhoto,
-  show
+  show,
 }
