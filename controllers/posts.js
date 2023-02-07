@@ -120,7 +120,19 @@ async function createLike(req, res) {
     res.status(500).json(error)
   }
 }
-
+async function showPost(req,res){
+  try{
+    const post = await Post.findById(req.body.id)
+    .populate('photo')
+    .populate('caption')
+    .populate('comments')
+    .populate('likes')
+    .populate('author')
+    res.status(200).json(post)
+  }catch(error){
+    res.status(500).json(error)
+  }
+}
 export {
   index,
   create,
@@ -128,5 +140,6 @@ export {
   deletePost as delete,
   updatePost as update,
   createLike,
-  addPhoto
+  addPhoto,
+  showPost
 }
