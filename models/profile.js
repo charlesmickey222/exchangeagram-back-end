@@ -19,10 +19,17 @@ const messageSchema = new Schema(
   }
 )
 
+
+
 const profileSchema = new Schema({
+  
   name: String,
   photo: String,
   posts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Post'
+  }],
+  likedPosts: [{
     type: Schema.Types.ObjectId,
     ref: 'Post'
   }],

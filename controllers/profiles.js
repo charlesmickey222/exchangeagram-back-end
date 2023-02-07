@@ -42,8 +42,39 @@ async function show(req, res) {
   }
 }
 
+async function addLikedPost(req, res) {
+  try {
+    console.log('Call was made')
+    const profile = await Profile.findById(req.user.profile)
+    console.log(profile)
+    console.log(req.params.postId)
+    profile.likedPosts.push(req.params.postId)
+    profile.save()
+    console.log(profile)
+    res.status(201)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+async function removeLikedPost(req, res) {
+  try {
+    console.log('Call was made')
+    const profile = await Profile.findById(req.user.profile)
+    console.log(profile)
+    console.log(req.params.postId)
+    profile.likedPosts.remove(req.params.postId)
+    profile.save()
+    console.log(profile)
+    res.status(201)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export {
   index,
   addPhoto,
-  show
+  show,
+  addLikedPost,
+  removeLikedPost
 }
