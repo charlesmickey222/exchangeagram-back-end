@@ -56,6 +56,12 @@ async function createComment(req, res) {
     await post.populate({path: 'comments', populate: {path: 'author'}})
     // console.log('CREATECOMMENT:', path)
     res.status(201).json(post)
+    const newComment = post.comments[post.comments.length - 1]
+    const profile = await Profile.findById(req.user.profile)
+    newComment.author = profile.name
+    console.log('Profile:', profile)
+    console.log('Comment Author:', newComment.author)
+    res.status(201).json(newComment)
   } catch (error) {
     console.log(error)
     res.status(500).json(error)
@@ -134,7 +140,14 @@ async function createLike(req, res) {
     res.status(500).json(error)
   }
 }
-
+async function showPost(req,res){
+  try{
+    const post = await Post.findById(req.params.id)
+    res.status(200).json(post)
+  }catch(error){
+    res.status(500).json(error)
+  }
+}
 export {
   index,
   create,
@@ -142,5 +155,6 @@ export {
   deletePost as delete,
   updatePost as update,
   createLike,
-  addPhoto
+  addPhoto,
+  showPost
 }
