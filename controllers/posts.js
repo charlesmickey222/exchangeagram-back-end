@@ -32,21 +32,6 @@ async function create(req, res) {
   }
 }
 
-// async function createComment(req, res) {
-//   try {
-//     req.body.author = req.user.profile
-//     const post = await Post.findById(req.params.id)
-//     post.comments.push(req.body)
-//     await post.save()
-//     const newComment = post.comments[post.comments.length - 1]
-//     const profile = await Profile.findById(req.user.profile)
-//     newComment.author = profile.name
-//     res.status(201).json(newComment)
-//   } catch (error) {
-//     res.status(500).json(error)
-//   }
-// }
-
 async function createComment(req, res) {
   try {
     req.body.author = req.user.profile
@@ -54,14 +39,7 @@ async function createComment(req, res) {
     post.comments.push(req.body)
     await post.save()
     await post.populate({path: 'comments', populate: {path: 'author'}})
-    // console.log('CREATECOMMENT:', path)
     res.status(201).json(post)
-    const newComment = post.comments[post.comments.length - 1]
-    const profile = await Profile.findById(req.user.profile)
-    newComment.author = profile.name
-    console.log('Profile:', profile)
-    console.log('Comment Author:', newComment.author)
-    res.status(201).json(newComment)
   } catch (error) {
     console.log(error)
     res.status(500).json(error)
