@@ -118,10 +118,10 @@ async function createLike(req, res) {
     res.status(500).json(error)
   }
 }
-
 async function showPost(req,res){
   try{
     const post = await Post.findById(req.params.id)
+    .populate({path: 'comments', populate: {path: 'author'}})
     res.status(200).json(post)
   }catch(error){
     res.status(500).json(error)
