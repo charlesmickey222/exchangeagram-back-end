@@ -120,7 +120,7 @@ async function createLike(req, res) {
     res.status(500).json(error)
   }
 }
-async function show(req,res){
+async function showPost(req,res){
   try{
     const post = await Post.findById(req.body.id)
     .populate('photo')
@@ -128,7 +128,7 @@ async function show(req,res){
     .populate('comments')
     .populate('likes')
     .populate('author')
-    req.json(post)
+    res.status(200).json(post)
   }catch(error){
     res.status(500).json(error)
   }
@@ -141,5 +141,5 @@ export {
   updatePost as update,
   createLike,
   addPhoto,
-  show
+  showPost
 }
