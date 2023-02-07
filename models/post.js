@@ -18,8 +18,7 @@ const commentSchema = new Schema(
 
 const likeSchema = new Schema(
   {
-    like: Boolean,
-    dislike: Boolean,
+    like: Number,
     likedBy: {
       type: Schema.Types.ObjectId,
       ref: 'Profile'
