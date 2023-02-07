@@ -122,12 +122,7 @@ async function createLike(req, res) {
 }
 async function showPost(req,res){
   try{
-    const post = await Post.findById(req.body.id)
-    .populate('photo')
-    .populate('caption')
-    .populate('comments')
-    .populate('likes')
-    .populate('author')
+    const post = await Post.findById(req.params.id)
     res.status(200).json(post)
   }catch(error){
     res.status(500).json(error)
