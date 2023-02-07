@@ -118,6 +118,7 @@ async function createLike(req, res) {
     res.status(500).json(error)
   }
 }
+
 async function showPost(req,res){
   try{
     const post = await Post.findById(req.params.id)
