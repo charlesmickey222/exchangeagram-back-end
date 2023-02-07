@@ -40,6 +40,8 @@ async function createComment(req, res) {
     const newComment = post.comments[post.comments.length -1]
     const profile = await Profile.findById(req.user.profile)
     newComment.author = profile
+    console.log('New Comment:',newComment)
+    console.log('Profile:', profile)
     res.status(201).json(newComment)
   } catch (error) {
     res.status(500).json(error)
