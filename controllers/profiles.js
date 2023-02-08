@@ -68,10 +68,17 @@ async function removeLikedPost(req, res) {
     const profile = await Profile.findById(req.user.profile)  
     profile.likedPosts.remove(req.params.postId)
     profile.save()
+    removeLikesToPost(req.params.postId, req.user.profile)
     res.status(201)
   } catch (error) {
     res.status(500).json(error)
   }
+}
+async function removeLikesToPost(postId, profile){
+  const post = await Post.findById(postId)
+  post.likes.remove({likedBy: profile})
+  post.save()
+  console.log(post)
 }
 
 async function createMessage(req, res) {
