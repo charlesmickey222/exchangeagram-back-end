@@ -71,10 +71,26 @@ async function removeLikedPost(req, res) {
   }
 }
 
+async function createMessage(req, res) {
+  try {
+    req.body.author = req.user.profile
+    const profile = await Profile.findById(req.params.id)
+    profile.messages.push(req.body)
+    await profile.save()
+    await profile.populate({path: 'messages', populate: {path: 'author'}})
+    res.status(201).json(profile)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+      
+
 export {
   index,
   addPhoto,
   show,
   addLikedPost,
-  removeLikedPost
+  removeLikedPost,
+  createMessage,
 }

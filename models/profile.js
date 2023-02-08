@@ -8,11 +8,7 @@ const messageSchema = new Schema(
       type: String,
       required: true
     },
-    sender: {
-      type: Schema.Types.ObjectId,
-      ref: 'Profile'
-    },
-    recipient: {
+    author: {
       type: Schema.Types.ObjectId,
       ref: 'Profile'
     },
