@@ -84,6 +84,17 @@ async function createMessage(req, res) {
     res.status(500).json(error)
   }
 }
+
+async function messageIndex(req, res) {
+  try {
+    const profile = await Profile.findById(req.params.id)
+      await profile.populate({path: 'messages', populate: {path: 'author'}})
+    res.status(200).json(profile)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
       
 
 export {
@@ -93,4 +104,5 @@ export {
   addLikedPost,
   removeLikedPost,
   createMessage,
+  messageIndex,
 }
