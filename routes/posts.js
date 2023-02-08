@@ -16,6 +16,7 @@ router.post('/:id/comments', checkAuth, postsCtrl.createComment)
 router.delete('/:id', checkAuth, postsCtrl.delete)
 router.put('/:id', checkAuth, postsCtrl.update)
 router.put('/:id/add-photo', checkAuth, postsCtrl.addPhoto)
+router.patch('/:id/add-likes', checkAuth, postsCtrl.addLikes)
 
 export {
   router

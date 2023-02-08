@@ -1,4 +1,5 @@
 import { Profile } from '../models/profile.js'
+import { Post } from '../models/post.js'
 import { v2 as cloudinary } from 'cloudinary'
 
 function index(req, res) {
@@ -44,27 +45,29 @@ async function show(req, res) {
 
 async function addLikedPost(req, res) {
   try {
-    console.log('Call was made')
     const profile = await Profile.findById(req.user.profile)
-    console.log(profile)
-    console.log(req.params.postId)
     profile.likedPosts.push(req.params.postId)
     profile.save()
-    console.log(profile)
-    res.status(201)
+    addLikesToPost(req.params.postId, req.user.profile)
+    res.status(201).json()
   } catch (error) {
     res.status(500).json(error)
   }
 }
+
+async function addLikesToPost(postId, profile){
+  const post = await Post.findById(postId)
+  post.likes.push({likedBy: profile})
+  post.save()
+  console.log(post)
+}
+
+
 async function removeLikedPost(req, res) {
   try {
-    console.log('Call was made')
-    const profile = await Profile.findById(req.user.profile)
-    console.log(profile)
-    console.log(req.params.postId)
+    const profile = await Profile.findById(req.user.profile)  
     profile.likedPosts.remove(req.params.postId)
     profile.save()
-    console.log(profile)
     res.status(201)
   } catch (error) {
     res.status(500).json(error)
@@ -73,17 +76,9 @@ async function removeLikedPost(req, res) {
 
 async function createMessage(req, res) {
   try {
-    console.log('hello')
-    console.log(req.params.id)
-    console.log(req.body)
-    
     const profile = await Profile.findById(req.user.profile)
     profile.messages.push(req.body)
     profile.save()
-    
-    console.log(profile.messages)
-
-
     res.status(201)
   } catch (error) {
     console.log(error)

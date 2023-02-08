@@ -104,6 +104,15 @@ function addPhoto(req, res) {
   })
 }
 
+async function addLikes(req, res){
+  try{
+    console.log(req.body)
+    res.status(200).json()
+  }catch(error){
+    res.status(500).json(error)
+  }
+}
+
 
 async function showPost(req,res){
   try{
@@ -121,5 +130,6 @@ export {
   deletePost as delete,
   updatePost as update,
   addPhoto,
+  addLikes,
   showPost
 }
