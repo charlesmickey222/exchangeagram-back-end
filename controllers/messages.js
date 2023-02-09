@@ -15,7 +15,7 @@ async function createMessage(req, res) {
 
 async function messageIndex(req, res) {
   try {
-    const messages = await Message.find({})
+    const messages = await Message.find({}).sort({_id : -1})
     .populate('author')
     res.status(200).json(messages)
   } catch (error) {
