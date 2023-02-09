@@ -62,7 +62,6 @@ async function addLikesToPost(postId, profile){
   console.log(post)
 }
 
-
 async function removeLikedPost(req, res) {
   try {
     const profile = await Profile.findById(req.user.profile)  
@@ -81,36 +80,10 @@ async function removeLikesToPost(postId, profile){
   console.log(post)
 }
 
-async function createMessage(req, res) {
-  try {
-    const profile = await Profile.findById(req.user.profile)
-    profile.messages.push(req.body)
-    profile.save()
-    res.status(201)
-  } catch (error) {
-    console.log(error)
-    res.status(500).json(error)
-  }
-}
-
-async function messageIndex(req, res) {
-  try {
-    const profile = await Profile.findById(req.params.id)
-      await profile.populate({path: 'messages', populate: {path: 'author'}})
-    res.status(200).json(profile)
-  } catch (error) {
-    console.log(error)
-    res.status(500).json(error)
-  }
-}
-      
-
 export {
   index,
   addPhoto,
   show,
   addLikedPost,
   removeLikedPost,
-  createMessage,
-  messageIndex,
 }

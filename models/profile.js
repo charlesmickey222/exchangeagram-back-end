@@ -2,21 +2,6 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const messageSchema = new Schema(
-  {
-    text: {
-      type: String,
-      required: true
-    },
-    author: {
-      type: Schema.Types.ObjectId,
-      ref :'Profile'
-    }
-  }
-)
-
-
-
 const profileSchema = new Schema({
   
   name: String,
@@ -29,7 +14,10 @@ const profileSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Post'
   }],
-  messages: [messageSchema]
+  messages: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Message'
+  }]
 },{
   timestamps: true,
 })

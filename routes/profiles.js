@@ -14,7 +14,5 @@ router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
 router.get('/:id', checkAuth, profilesCtrl.show)
 router.patch('/:id/add-like/:postId', checkAuth, profilesCtrl.addLikedPost)
 router.delete('/:id/add-like/:postId', checkAuth, profilesCtrl.removeLikedPost)
-router.post('/:id/messages/', checkAuth, profilesCtrl.createMessage)
-router.get('/:id/messages', checkAuth, profilesCtrl.messageIndex)
 
 export { router }
