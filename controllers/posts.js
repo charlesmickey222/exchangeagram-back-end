@@ -91,11 +91,9 @@ function addPhoto(req, res) {
         console.log('hey', image.url)
         post.photo = image.url
         post.save()
-
+        post.author = profile
+        res.status(201).json(post)
       })
-        .then(profile => {
-          res.status(201).json(profile)
-        })
     })
     .catch(err => {
       console.log(err)
