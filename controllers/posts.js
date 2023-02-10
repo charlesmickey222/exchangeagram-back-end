@@ -81,14 +81,11 @@ function addPhoto(req, res) {
 
   Profile.findById(req.params.id)
   .then(profile =>  {
-
     const postObjId = profile.posts[profile.posts.length - 1].toString()
-    
-    cloudinary.uploader.upload(imageFile, {tags: `${req.user.email}`})
+      cloudinary.uploader.upload(imageFile, {tags: `${req.user.email}`})
     .then(image => {
       Post.findById(postObjId)
       .then(post=>{
-        console.log('hey', image.url)
         post.photo = image.url
         post.save()
         post.author = profile
@@ -96,7 +93,6 @@ function addPhoto(req, res) {
       })
     })
     .catch(err => {
-      console.log(err)
       res.status(500).json(err)
     })
   })
@@ -104,7 +100,6 @@ function addPhoto(req, res) {
 
 async function addLikes(req, res){
   try{
-    console.log(req.body)
     res.status(200).json()
   }catch(error){
     res.status(500).json(error)

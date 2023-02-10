@@ -77,7 +77,6 @@ async function removeLikesToPost(postId, profile){
   const post = await Post.findById(postId)
   post.likes.remove({likedBy: profile})
   post.save()
-  console.log(post)
 }
 
 export {
