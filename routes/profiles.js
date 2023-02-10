@@ -15,4 +15,6 @@ router.get('/:id', checkAuth, profilesCtrl.show)
 router.patch('/:id/add-like/:postId', checkAuth, profilesCtrl.addLikedPost)
 router.delete('/:id/add-like/:postId', checkAuth, profilesCtrl.removeLikedPost)
 
-export { router }
+export {
+  router
+}

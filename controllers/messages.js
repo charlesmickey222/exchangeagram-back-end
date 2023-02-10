@@ -1,5 +1,4 @@
 import { Message } from '../models/message.js'
-import { Profile } from '../models/profile.js'
 
 async function createMessage(req, res) {
   try {

@@ -55,11 +55,10 @@ async function addLikedPost(req, res) {
   }
 }
 
-async function addLikesToPost(postId, profile){
+async function addLikesToPost(postId, profile) {
   const post = await Post.findById(postId)
   post.likes.push({likedBy: profile})
   post.save()
-  console.log(post)
 }
 
 async function removeLikedPost(req, res) {
@@ -73,7 +72,8 @@ async function removeLikedPost(req, res) {
     res.status(500).json(error)
   }
 }
-async function removeLikesToPost(postId, profile){
+
+async function removeLikesToPost(postId, profile) {
   const post = await Post.findById(postId)
   post.likes.remove({likedBy: profile})
   post.save()
@@ -84,5 +84,5 @@ export {
   addPhoto,
   show,
   addLikedPost,
-  removeLikedPost,
+  removeLikedPost
 }
