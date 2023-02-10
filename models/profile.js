@@ -3,7 +3,6 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const profileSchema = new Schema({
-  
   name: String,
   photo: String,
   posts: [{
@@ -18,7 +17,7 @@ const profileSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Message'
   }]
-},{
+}, {
   timestamps: true,
 })
 

@@ -1,8 +1,6 @@
 import { Message } from '../models/message.js'
-import { Profile } from '../models/profile.js'
 
 async function createMessage(req, res) {
-  console.log('TEST')
   try {
     req.body.author = req.user.profile
     const message = await Message.create(req.body)

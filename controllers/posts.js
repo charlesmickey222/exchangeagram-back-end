@@ -2,7 +2,6 @@ import { Profile } from "../models/profile.js" ;
 import { Post } from "../models/post.js" ;
 import { v2 as cloudinary } from 'cloudinary'
 
-
 async function index(req, res) {
   try {
     const posts = await Post.find({})
@@ -78,16 +77,13 @@ async function updatePost(req, res) {
 
 function addPhoto(req, res) {
   const imageFile = req.files.photo.path
-
   Profile.findById(req.params.id)
-  .then(profile =>  {
-
+  .then(profile => {
     const postObjId = profile.posts[profile.posts.length - 1].toString()
-    
     cloudinary.uploader.upload(imageFile, {tags: `${req.user.email}`})
     .then(image => {
       Post.findById(postObjId)
-      .then(post=>{
+      .then(post => {
         console.log('hey', image.url)
         post.photo = image.url
         post.save()
@@ -102,22 +98,21 @@ function addPhoto(req, res) {
   })
 }
 
-async function addLikes(req, res){
-  try{
-    console.log(req.body)
+async function addLikes(req, res) {
+  try {
     res.status(200).json()
-  }catch(error){
+  } catch(error) {
     res.status(500).json(error)
   }
 }
 
 
-async function showPost(req,res){
-  try{
+async function showPost(req,res) {
+  try {
     const post = await Post.findById(req.params.id)
     .populate({path: 'comments', populate: {path: 'author'}})
     res.status(200).json(post)
-  }catch(error){
+  } catch(error) {
     res.status(500).json(error)
   }
 }
