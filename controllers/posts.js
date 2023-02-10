@@ -26,7 +26,6 @@ async function create(req, res) {
     post.author = profile
     res.status(201).json(post)
   } catch (error) {
-    console.log(error)
     res.status(500).json(error)
   }
 }
@@ -40,7 +39,6 @@ async function createComment(req, res) {
     await post.populate({path: 'comments', populate: {path: 'author'}})
     res.status(201).json(post)
   } catch (error) {
-    console.log(error)
     res.status(500).json(error)
   }
 }
@@ -100,7 +98,6 @@ function addPhoto(req, res) {
 
 async function addLikes(req, res) {
   try {
-
     res.status(200).json()
   } catch(error) {
     res.status(500).json(error)
